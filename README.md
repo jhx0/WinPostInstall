@@ -15,6 +15,8 @@ The script takes care of some commont tasks that most will do anyway after a fre
 - Enables reboot on crash
 - Enables showing known file extensions
 - Enables showing hidden files
+- Disabling Recent Files (Explorer)
+- Disabling Frequen Files (Explorer)
 - Reboots the system
 - Also, logs everything it does (WinPostInstall.log)
 
