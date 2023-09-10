@@ -327,6 +327,18 @@ function Show-HiddenFiles {
 	
 	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Type DWord -Value 1
 }
+
+function Disable-RecentFiles {
+	Write-Log "Disable Recent Files (Explorer)"
+
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "ShowRecent" -Type DWord -Value 0
+}
+
+function Disable-FrequentFiles {
+	Write-Log "Disable Frequent Files (Explorer)"
+
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "ShowFrequent" -Type DWord -Value 0
+}
 ##
 
 function Display-Logo {
@@ -366,12 +378,15 @@ $script = {
 		Enable-AutoRebootOnCrash
 		Show-KnownExtensions
 		Show-HiddenFiles
+		Disable-RecentFiles
+		Disable-FrequentFiles
 	}
 	
 	Write-Log "Done!"
 
 	if($Reboot) {
 		Write-Log "Rebooting system"
+
 		Restart-System
 	}
 }
