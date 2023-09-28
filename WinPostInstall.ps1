@@ -339,6 +339,18 @@ function Disable-FrequentFiles {
 
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "ShowFrequent" -Type DWord -Value 0
 }
+
+function Show-SuperHiddenFiles {
+	Write-Log "Showing super hidden files"
+	
+	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowSuperHidden" -Type DWord -Value 1
+}
+
+function Enable-GodMode {
+	Write-Log "Enabling God Mode (Desktop Shortcut)"
+
+	New-Item -Path "$HOME\Desktop" -Name "GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}" -ItemType "Directory" | Out-Null
+}
 ##
 
 function Display-Logo {
@@ -380,6 +392,7 @@ $script = {
 		Show-HiddenFiles
 		Disable-RecentFiles
 		Disable-FrequentFiles
+		Show-SuperHiddenFiles
 	}
 	
 	Write-Log "Done!"
