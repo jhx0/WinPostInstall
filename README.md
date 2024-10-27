@@ -35,7 +35,7 @@ $> Set-ExecutionPolicy unrestricted
 ```
 
 ## External scripts
-The script leverages the excellent debloat PowerShell script from **Raphire**
+The script leverages the excellent debloat PowerShell script from **Raphire**   
 Link: https://github.com/Raphire/Win11Debloat
 
 ## Why?
