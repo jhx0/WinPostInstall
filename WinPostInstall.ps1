@@ -7,11 +7,10 @@
 ##
 param (
 	[switch]$Debug = $false,
-	[switch]$Extra = $false,
 	[switch]$Reboot = $false
 )
 
-$Version = "0.1"
+$Version = "0.4"
 
 $Logo = @"
 
@@ -25,145 +24,57 @@ $Logo = @"
 
 "@
 
-# Apps to remove
-$AppList = @(
-    'Microsoft.3DBuilder',
-	'Microsoft.Microsoft3DViewer',
-	'Microsoft.Print3D',
-	'Microsoft.Appconnector',
-	'Microsoft.BingFinance',
-	'Microsoft.BingNews',
-	'Microsoft.BingSports',
-	'Microsoft.BingTranslator',
-	'Microsoft.BingWeather',
-	'Microsoft.BingFoodAndDrink',
-	'Microsoft.BingTravel',
-	'Microsoft.BingHealthAndFitness',
-	'Microsoft.FreshPaint',
-	'Microsoft.MicrosoftOfficeHub',
-	'Microsoft.WindowsFeedbackHub',
-	'Microsoft.MicrosoftSolitaireCollection',
-	'Microsoft.MicrosoftPowerBIForWindows',
-	'Microsoft.MinecraftUWP',
-	'Microsoft.MicrosoftStickyNotes',
-	'Microsoft.NetworkSpeedTest',
-	'Microsoft.Office.OneNote',
-	'Microsoft.OneConnect',
-	'Microsoft.People',
-	'Microsoft.SkypeApp',
-	'Microsoft.Wallet',
-	'Microsoft.WindowsAlarms',
-	'Microsoft.WindowsCamera',
-	'Microsoft.windowscommunicationsapps',
-	'Microsoft.WindowsMaps',
-	'Microsoft.WindowsPhone',
-	'Microsoft.WindowsSoundRecorder',
-	'Microsoft.XboxApp',
-	'Microsoft.XboxGameOverlay',
-	'Microsoft.XboxIdentityProvider',
-	'Microsoft.XboxSpeechToTextOverlay',
-	'Microsoft.ZuneMusic',
-	'Microsoft.ZuneVideo',
-	'Microsoft.CommsPhone',
-	'Microsoft.ConnectivityStore',
-	'Microsoft.GetHelp',
-	'Microsoft.Getstarted',
-	'Microsoft.Messaging',
-	'Microsoft.Office.Sway',
-	'Microsoft.WindowsReadingList',
-	'9E2F88E3.Twitter',
-	'PandoraMediaInc.29680B314EFC2',
-	'Flipboard.Flipboard',
-	'ShazamEntertainmentLtd.Shazam',
-	'king.com.CandyCrushSaga',
-	'king.com.CandyCrushSodaSaga',
-	'king.com.*',
-	'ClearChannelRadioDigital.iHeartRadio',
-	'4DF9E0F8.Netflix',
-	'6Wunderkinder.Wunderlist',
-	'Drawboard.DrawboardPDF',
-	'2FE3CB00.PicsArt-PhotoStudio',
-	'D52A8D61.FarmVille2CountryEscape',
-	'TuneIn.TuneInRadio',
-	'GAMELOFTSA.Asphalt8Airborne',
-	'TheNewYorkTimes.NYTCrossword',
-	'DB6EA5DB.CyberLinkMediaSuiteEssentials',
-	'Facebook.Facebook',
-	'flaregamesGmbH.RoyalRevolt2',
-	'Playtika.CaesarsSlotsFreeCasino',
-	'A278AB0D.MarchofEmpires',
-	'KeeperSecurityInc.Keeper',
-	'ThumbmunkeysLtd.PhototasticCollage',
-	'XINGAG.XING',
-	'89006A2E.AutodeskSketchBook',
-	'D5EA27B7.Duolingo-LearnLanguagesforFree',
-	'46928bounde.EclipseManager',
-	'ActiproSoftwareLLC.562882FEEB491',
-	'DolbyLaboratories.DolbyAccess',
-	'A278AB0D.DisneyMagicKingdoms',
-	'WinZipComputing.WinZipUniversal',
-	'Microsoft.ScreenSketch',
-	'Microsoft.XboxGamingOverlay',
-	'Microsoft.Xbox.TCUI',
-	'Microsoft.YourPhone',
-	'HP Wolf Security',
-	'HP Wolf Security Application Support for Sure Sense',
-	'HP Wolf Security Application Support for Windows',
-	'Hp Wolf Security - Console',
-	'ExpressVPN',
-	'ACGMediaPlayer',
-    'ActiproSoftwareLLC',
-    'AdobePhotoshopExpress',
-    'Amazon.com.Amazon',
-    'Asphalt8Airborne',
-    'AutodeskSketchBook',
-    'BubbleWitch3Saga',
-    'CaesarsSlotsFreeCasino',
-    'CandyCrush',
-    'COOKINGFEVER',
-    'CyberLinkMediaSuiteEssentials';
-    'DisneyMagicKingdoms',
-    'Dolby',
-    'DrawboardPDF',
-    'Duolingo-LearnLanguagesforFree',
-    'EclipseManager',
-    'Facebook',
-    'FarmVille2CountryEscape',
-    'FitbitCoach',
-    'Flipboard',
-    'HiddenCity',
-    'Hulu',
-	'iHeartRadio',
-    'Keeper',
-    'LinkedInforWindows',
-    'MarchofEmpires',
-    'Netflix',
-    'NYTCrossword',
-    'OneCalendar',
-    'PandoraMediaInc',
-    'PhototasticCollage',
-    'PicsArt-PhotoStudio',
-    'Plex',
-    'PolarrPhotoEditorAcademicEdition',
-    'RoyalRevolt',
-    'Shazam',
-    'Sidia.LiveWallpaper',
-    'SlingTV',
-    'Speed Test',
-    'Sway',
-    'TuneInRadio',
-    'Twitter',
-    'Viber',
-    'WinZipUniversal',
-    'Wunderlist',
-    'XING'
+$WSLDistro = "Debian"
+
+# Apps to install
+$WingetAppList = @(
+	"Mozilla.Firefox", 
+	"GoLang.Go",
+	"Python.Python.3.13",
+	"Discord.Discord",
+	"Element.Element",
+	"Oracle.VirtualBox",
+	"Notepad++.Notepad++",
+	"Brave.Brave",
+	"TheDocumentFoundation.LibreOffice",
+	"7zip.7zip",
+	"AppWork.JDownloader", 
+	"Microsoft.VisualStudio.2022.Community",
+	"Mozilla.Thunderbird",
+	"Microsoft.WindowsTerminal",
+	"Google.Chrome",
+	"Valve.Steam",
+	"VideoLAN.VLC",
+	"ShareX.ShareX",
+	"Cygwin.Cygwin",
+	"MSYS2.MSYS2",
+	"vim.vim",
+    "qBittorrent.qBittorrent",
+	"Rainmeter.Rainmeter",
+	"MullvadVPN.MullvadVPN",
+	"OBSProject.OBSStudio",
+	"Microsoft.Sysinternals.ProcessExplorer",
+	"Microsoft.Sysinternals.TCPView",
+	"Microsoft.Sysinternals.Autoruns",
+	"KeePassXCTeam.KeePassXC",
+	"AutoHotkey.AutoHotkey",
+	"IDRIX.VeraCrypt",
+	"TorProject.TorBrowser",
+	"voidtools.Everything",
+	"HandBrake.HandBrake",
+	"OpenWhisperSystems.Signal"
+)
+
+# App Paths to add
+$Paths = @(
+	"C:\Windows\Microsoft.NET\Framework\v4.0.30319",
+	"C:\Program Files (x86)\Vim\vim91"
 )
 
 ##
 # Global variables
 # Path to the Applications to install and logfile path
 ##
-$AppPath = "INSTALL"
 $LogFile = "PostInstall.log"
 $LogPath = (Get-Location).Path + "\" + $LogFile
 
@@ -194,16 +105,36 @@ function Run-AsAdmin {
     $IsAdmin = $currentUser.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 
 	if ($IsAdmin -eq $false)  {
-    	Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -noexit -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
+		Write-Host "[ERROR] You need admin rights to run some of the functions - Exiting!"
+		exit
 	}
 }
 
-function Remove-Apps {
-    Write-Log "Removing unwatend Apps"
+# Needed to get the Windows Update PS Module
+function Install-NuGET {
+    Install-PackageProvider -Name NuGet -Force
+}
 
-    foreach($App in $AppList) {
-        Get-AppxPackage "*$App*" | Remove-AppxPackage -AllUsers -ErrorAction 'SilentlyContinue' | Out-Null
-    }
+function Install-WindowsUpdates {
+	Write-Log "Running Windows Update"
+	
+	# Windows Update PS Module
+    Install-Module -Name PSWindowsUpdate -Force
+
+	# Get all Updates
+	Get-WindowsUpdate -Confirm -AcceptAll
+
+	# Do all upgrades
+	Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -Confirm -IgnoreReboot
+}
+
+function Run-Debloat {
+	# Source: https://github.com/Raphire/Win11Debloat
+
+	Write-Log "Debloating Windows"
+
+	# Execute external script directly
+	& ([scriptblock]::Create((irm "https://win11debloat.raphi.re/"))) -RunDefaults -Silent
 }
 
 function Set-PowerSettings {
@@ -232,25 +163,29 @@ function Install-winget-Updates {
     Write-Log "Updating via winget"
 
 	# Upgrade everything
-    winget upgrade --all --silent --force --accept-package-agreements --accept-source-agreements | Out-Null
+    winget upgrade --all --force --accept-package-agreements --accept-source-agreements
 }
 
-# Needed to get the Windows Update PS Module
-function Install-NuGET {
-    Install-PackageProvider -Name NuGet -Force | Out-Null
+function Install-WingetApplications {
+	foreach($app in $WingetAppList) {
+		winget install --accept-package-agreements --accept-source-agreements --id $app
+	}
 }
 
-function Install-WindowsUpdates {
-	Write-Log "Running Windows Update"
+function Alter-PathVariable {
+	Write-Log "Adding PATH entries"
 	
-	# Windows Update PS Module
-    Install-Module -Name PSWindowsUpdate -Force | Out-Null
+	foreach($path in $Paths) {
+		$CurrentPATH = ([Environment]::GetEnvironmentVariable("PATH", 1)).Split(";")
 
-	# Get all Updates
-	Get-WindowsUpdate -Confirm -AcceptAll | Out-Null
+        if($CurrentPATH.Contains($path)) {
+            continue
+        }
 
-	# Do all upgrades
-	Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -Confirm -IgnoreReboot | Out-Null
+		$NewPATH = ($CurrentPATH + $Path) -Join ";"
+        Write-Host $NewPATH
+		[Environment]::SetEnvironmentVariable("PATH", $NewPATH, [EnvironmentVariableTarget]::User) 
+	}
 }
 
 function Set-OEMInformation {
@@ -258,24 +193,12 @@ function Set-OEMInformation {
 	
     $OEMRegPath = "HKLM:\Software\Microsoft\Windows\CurrentVersion\OEMInformation"
 
-    Set-ItemProperty -Path $OEMRegPath -Name Manufacturer -Value "Some Corp"
-    Set-ItemProperty -Path $OEMRegPath -Name SupportPhone -Value "111111"
-    Set-ItemProperty -Path $OEMRegPath -Name Model -Value "System"
-    Set-ItemProperty -Path $OEMRegPath -Name SupportURL -Value "test.example.com"
+    Set-ItemProperty -Path $OEMRegPath -Name Manufacturer -Value "Home Corp"
+    Set-ItemProperty -Path $OEMRegPath -Name SupportPhone -Value "42"
+    Set-ItemProperty -Path $OEMRegPath -Name Model -Value "PC"
+    Set-ItemProperty -Path $OEMRegPath -Name SupportURL -Value "home.lan"
     Set-ItemProperty -Path $OEMRegPath -Name SupportHours -Value "Always" 
     Set-ItemProperty -Path $OEMRegPath -Name HelpCustomized -Value 0
-}
-
-function Install-Applications {
-	Write-Log "Installing applications"
-	
-	if(Test-Path -Path $AppPath) {
-		Get-ChildItem $AppPath | Foreach-Object {
-			Start-Process $_.FullName
-		}
-	} else {
-		Write-Log "No Applications installed!"
-	}
 }
 
 function Disable-Telemetry {
@@ -289,10 +212,11 @@ function Disable-Telemetry {
 	Set-ItemProperty -Path "Registry::HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "DoNotShowFeedbackNotifications" -Type Dword -Value 1
 }
 
-function Disable-PSScriptExecution {
-	Write-Log "Disabling Script execution"
-	
-	Set-ExecutionPolicy restricted
+function Install-WSL {
+	dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+	dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+	wsl --install -d $WSLDistro
 }
 
 function Restart-System {
@@ -301,19 +225,19 @@ function Restart-System {
 	Restart-Computer
 }
 
-##
-# Special tweaks
-##
+function Set-ClockToUTCTime {
+	Write-Log "Setting clock to UTC time"
+	
+	New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1 
+	
+	net start "Windows Time"
+	w32tm /resync
+}
+
 function Disable-FastStartup {
 	Write-Log "Disabling Fast Startup"
 	
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power" -Name "HiberbootEnabled" -Type DWord -Value 0
-}
-
-function Enable-AutoRebootOnCrash {
-	Write-Log "Enabling automatic reboot on crash"
-	
-	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl" -Name "AutoReboot" -Type DWord -Value 1
 }
 
 function Show-KnownExtensions {
@@ -349,9 +273,12 @@ function Show-SuperHiddenFiles {
 function Enable-GodMode {
 	Write-Log "Enabling God Mode (Desktop Shortcut)"
 
-	New-Item -Path "$HOME\Desktop" -Name "GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}" -ItemType "Directory" | Out-Null
+	if(Test-Path -Path "$HOME\Desktop\GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}") {
+		return
+	} else {
+		New-Item -Path "$HOME\Desktop" -Name "GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}" -ItemType "Directory" | Out-Null
+	}
 }
-##
 
 function Display-Logo {
 	Write-Host $Logo
@@ -369,31 +296,27 @@ $script = {
 	
 	Write-DebugMsg $LogPath
 	
-	Remove-Apps
+	# External scripts/software
+	Run-Debloat
+
+	# Builtin functions
+	Set-ClockToUTCTime
 	Set-PowerSettings
-	Install-Applications
+	Install-WingetApplications
 	Install-winget-Updates
 	Install-NuGET
 	Install-WindowsUpdates
+	Alter-PathVariable
 	Set-OEMInformation
 	Disable-Telemetry
-	Disable-PSScriptExecution
-
-	if($Extra) {
-		Write-Log "Running extra tasks..."
-
-		##
-		# Special tweaks:
-		# Enable only if needed!
-		##
-		Disable-FastStartup
-		Enable-AutoRebootOnCrash
-		Show-KnownExtensions
-		Show-HiddenFiles
-		Disable-RecentFiles
-		Disable-FrequentFiles
-		Show-SuperHiddenFiles
-	}
+	Show-KnownExtensions
+	Show-HiddenFiles
+	Disable-FastStartup
+	Disable-RecentFiles
+	Disable-FrequentFiles
+	Install-WSL
+	Show-SuperHiddenFiles
+	Enable-GodMode
 	
 	Write-Log "Done!"
 
@@ -403,7 +326,6 @@ $script = {
 		Restart-System
 	}
 }
-
 
 ##
 # Main
