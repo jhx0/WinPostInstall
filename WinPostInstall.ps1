@@ -62,7 +62,9 @@ $WingetAppList = @(
 	"TorProject.TorBrowser",
 	"voidtools.Everything",
 	"HandBrake.HandBrake",
-	"OpenWhisperSystems.Signal"
+	"OpenWhisperSystems.Signal",
+	"OpenVPNTechnologies.OpenVPNConnect",
+	"TeamViewer.TeamViewer"
 )
 
 # App Paths to add
