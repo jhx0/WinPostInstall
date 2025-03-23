@@ -64,7 +64,8 @@ $WingetAppList = @(
 	"HandBrake.HandBrake",
 	"OpenWhisperSystems.Signal",
 	"OpenVPNTechnologies.OpenVPNConnect",
-	"TeamViewer.TeamViewer"
+	"TeamViewer.TeamViewer",
+	"VSCodium.VSCodium"
 )
 
 # App Paths to add
