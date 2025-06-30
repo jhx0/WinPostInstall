@@ -42,7 +42,6 @@ $WingetAppList = @(
 	"Microsoft.VisualStudio.2022.Community",
 	"Mozilla.Thunderbird",
 	"Microsoft.WindowsTerminal",
-	"Google.Chrome",
 	"Valve.Steam",
 	"VideoLAN.VLC",
 	"ShareX.ShareX",
