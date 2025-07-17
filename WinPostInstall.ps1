@@ -131,6 +131,10 @@ function Install-WindowsUpdates {
 	Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -Confirm -IgnoreReboot
 }
 
+function Run-Winutil {
+	& ([scriptblock]::Create((irm "https://christitus.com/win"))) -RunDefaults -Silent
+}
+
 function Run-Debloat {
 	# Source: https://github.com/Raphire/Win11Debloat
 
@@ -299,7 +303,7 @@ $script = {
 	
 	Write-DebugMsg $LogPath
 	
-	# External scripts/software
+	# Run debloat script
 	Run-Debloat
 
 	# Builtin functions
@@ -320,6 +324,9 @@ $script = {
 	Install-WSL
 	Show-SuperHiddenFiles
 	Enable-GodMode
+	
+	# Run winutil
+	Run-Winutil
 	
 	Write-Log "Done!"
 
